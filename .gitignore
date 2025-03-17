@@ -1,0 +1,31 @@
+# General ignores
+.DS_Store
+Thumbs.db
+node_modules/
+.vscode/
+.idea/
+
+# Backend (Python)
+backend/__pycache__/
+backend/venv/
+backend/.cache/
+backend/.env
+
+# Python-specific
+*.pyc
+*.pyo
+*.pyd
+
+# Frontend (React.js)
+frontend/node_modules/
+frontend/.env
+frontend/build/
+
+# Logs and system files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore lock files (optional)
+package-lock.json
+pip-log.txt
