@@ -3,3 +3,4 @@ flask-cors
 spotipy
 python-dotenv
 google-generativeai
+gunicorn
