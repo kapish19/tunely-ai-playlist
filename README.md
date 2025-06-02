@@ -1,4 +1,4 @@
-# Tunely AI Playlist - React & Flask Application
+# Tunely AI Playlist Generator
 
 ## Overview
 Tunely is an AI-powered playlist generator that creates personalized Spotify playlists based on user preferences. Using Gemini AI for intelligent song recommendations and Spotify's API for music integration, it transforms mood descriptions or themes into curated playlists. 
