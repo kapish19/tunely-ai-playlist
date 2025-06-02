@@ -15,7 +15,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# ✅ Configure Gemini AI
+# Configure Gemini AI
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.0-flash-exp")
 
@@ -27,7 +27,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     scope="playlist-modify-public playlist-modify-private"
 ))
 
-# ✅ Manage playlist expiration
+# Manage playlist expiration
 playlists = {}
 playlist_lock = threading.Lock()
 
@@ -50,7 +50,7 @@ def cleanup_playlists():
 cleanup_thread = threading.Thread(target=cleanup_playlists, daemon=True)
 cleanup_thread.start()
 
-# ✅ API to generate a playlist
+# API to generate a playlist
 @app.route('/generate_playlist', methods=['POST'])
 def generate_playlist():
     data = request.json
@@ -60,7 +60,7 @@ def generate_playlist():
         return jsonify({"error": "Please provide input"}), 400
 
     try:
-        # 🔥 Gemini AI prompt for at least 15-20 songs
+        # Gemini AI prompt for at least 15-20 songs
         prompt = f"""
         You are a music recommendation expert. Based on the user's mood: "{user_prompt}", 
         generate **at least 15-20 song recommendations**.
@@ -75,7 +75,7 @@ def generate_playlist():
         response = model.generate_content(prompt)
         raw_songs = response.text.strip().split("\n")
 
-        # ✅ Extract valid songs using regex
+        # Extract valid songs using regex
         songs = []
         for song in raw_songs:
             match = re.match(r"^\d+\.\s(.+?)\s-\s(.+)$", song)  # Matches "1. Song - Artist"
@@ -85,7 +85,7 @@ def generate_playlist():
         if len(songs) < 15:
             return jsonify({"error": "Gemini AI did not return enough valid songs"}), 500
 
-        # ✅ Generate a Meaningful Playlist Name
+        # Generate a Meaningful Playlist Name
         playlist_name_prompt = f"""
         Based on this mood or theme: "{user_prompt}", suggest a **creative and engaging playlist name**.
         Respond **only** with the playlist name, no extra text.
@@ -93,13 +93,13 @@ def generate_playlist():
         playlist_response = model.generate_content(playlist_name_prompt)
         playlist_name = playlist_response.text.strip()
 
-        # ✅ Fetch songs from Spotify
+        # Fetch songs from Spotify
         song_uris = fetch_songs_from_spotify(songs)
 
         if len(song_uris) < 15:
             return jsonify({"error": "Not enough songs found on Spotify"}), 500
 
-        # ✅ Create a Spotify playlist with the generated name
+        # Create a Spotify playlist with the generated name
         user_id = sp.current_user()["id"]
         playlist = sp.user_playlist_create(user=user_id, name=playlist_name, public=True)
         sp.playlist_add_items(playlist["id"], song_uris)
