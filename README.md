@@ -2,15 +2,12 @@
 
 ## Overview
 Tunely is an AI-powered playlist generator that creates personalized Spotify playlists based on user preferences. Using Gemini AI for intelligent song recommendations and Spotify's API for music integration, it transforms mood descriptions or themes into curated playlists. 
-Here are the tech stack badges for Tunely AI Playlist in the same style:
+Here are the tech stack badges for Tunely AI Playlist in the same style
 
-![React](https://img.shields.io/badge/React-blueviolet)
-
-![Gemini-AI](https://img.shields.io/badge/Gemini-AI-blue)
-
-![Flask](https://img.shields.io/badge/Flask-orange)
-
-![APIs-Spotify](https://img.shields.io/badge/APIs-Spotify-green)
+![React](https://img.shields.io/badge/Powered_By-React-blueviolet)
+![Flask](https://img.shields.io/badge/Powered_By-Flask-orange)
+![Gemini](https://img.shields.io/badge/API-Gemini-blue)
+![Spotify](https://img.shields.io/badge/API-Spotify-green)
 
 ## Setup Instructions
 
